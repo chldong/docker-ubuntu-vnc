@@ -1,8 +1,11 @@
 FROM ubuntu:18.04
-MAINTAINER Marco Pantaleoni <marco.pantaleoni@gmail.com>
+LABEL maintainer "cuihailiang@gmail.com"
 
-RUN echo "Europe/Rome" > /etc/timezone
-# RUN sudo ln -fs /usr/share/zoneinfo/Europe/Rome /etc/localtime
+RUN echo "Asia/Shanghai" > /etc/timezone
+# RUN sudo ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+RUN sed -i "s@http://.*archive.ubuntu.com@http://mirrors.huaweicloud.com@g" /etc/apt/sources.list
+RUN sed -i "s@http://.*security.ubuntu.com@http://mirrors.huaweicloud.com@g" /etc/apt/sources.list
 
 RUN apt-get update -q && \
 	export DEBIAN_FRONTEND=noninteractive && \
@@ -18,7 +21,7 @@ RUN apt-get update -q && \
     apt-get install -y --no-install-recommends lxde tightvncserver xvfb dbus-x11 x11-utils && \
     apt-get install -y --no-install-recommends xfonts-base xfonts-75dpi xfonts-100dpi && \
     apt-get install -y --no-install-recommends python-pip python-dev python-qt4 && \
-    apt-get install -y --no-install-recommends libssl-dev && \
+    apt-get install -y --no-install-recommends libssl-dev firefox ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy && \
     apt-get autoclean -y && \
     apt-get autoremove -y && \
     apt-get clean && \
@@ -38,9 +41,9 @@ RUN touch /root/.Xauthority
 COPY start-vncserver.sh /root/
 RUN chmod a+x /root/start-vncserver.sh
 
-RUN echo "mycontainer" > /etc/hostname
+RUN echo "vnc.gkai.vip" > /etc/hostname
 RUN echo "127.0.0.1	localhost" > /etc/hosts
-RUN echo "127.0.0.1	mycontainer" >> /etc/hosts
+RUN echo "127.0.0.1	vnc.gkai.vip" >> /etc/hosts
 
 EXPOSE 5901
 ENV USER root

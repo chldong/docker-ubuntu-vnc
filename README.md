@@ -18,7 +18,7 @@ $ make run
 which is a shorthand for:
 
 ```bash
-$ docker run --rm -ti -p 5901:5901 --name docker-ubuntu panta/docker-ubuntu-vnc:latest
+$ docker run --rm -ti -p 5901:5901 --name docker-ubuntu saitron/docker-ubuntu-vnc:latest
 ```
 
 To get a shell on a running container:
