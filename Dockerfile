@@ -1,6 +1,8 @@
 FROM ubuntu:18.04
 LABEL maintainer "cuihailiang@gmail.com"
 
+ENV PASSWD saitron
+
 RUN echo "Asia/Shanghai" > /etc/timezone
 # RUN sudo ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -33,7 +35,7 @@ RUN mkdir -p /root/.vnc
 COPY xstartup /root/.vnc/
 RUN chmod a+x /root/.vnc/xstartup
 RUN touch /root/.vnc/passwd
-RUN /bin/bash -c "echo -e 'password\npassword\nn' | vncpasswd" > /root/.vnc/passwd
+RUN echo "$PASSWD" | vncpasswd -f > /root/.vnc/passwd
 RUN chmod 400 /root/.vnc/passwd
 RUN chmod go-rwx /root/.vnc
 RUN touch /root/.Xauthority
