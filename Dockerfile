@@ -38,7 +38,7 @@ RUN touch /root/.vnc/passwd
 RUN chmod 400 /root/.vnc/passwd
 RUN chmod go-rwx /root/.vnc
 RUN touch /root/.Xauthority
-
+RUN mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 COPY start-vncserver.sh /root/
 RUN chmod a+x /root/start-vncserver.sh
 
