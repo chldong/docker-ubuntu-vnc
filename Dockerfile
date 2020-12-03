@@ -35,7 +35,6 @@ RUN mkdir -p /root/.vnc
 COPY xstartup /root/.vnc/
 RUN chmod a+x /root/.vnc/xstartup
 RUN touch /root/.vnc/passwd
-RUN echo "$PASSWD" | vncpasswd -f > /root/.vnc/passwd
 RUN chmod 400 /root/.vnc/passwd
 RUN chmod go-rwx /root/.vnc
 RUN touch /root/.Xauthority
